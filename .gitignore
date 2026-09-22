@@ -67,3 +67,8 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+#new after going to MVS instead of VSC
+x64
+.vs
+packages
