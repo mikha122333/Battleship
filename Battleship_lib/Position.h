@@ -13,8 +13,8 @@ private:
     static const int _max_col;
 public:
     Position();
-    Position(const int&, const int&);
-    Position(const int&, const char&);
+    Position(const int, const int);
+    Position(const int, const char);
     Position(const Position&);
     Position(const std::string&);
     inline int row()const noexcept { return _row; }

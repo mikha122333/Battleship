@@ -12,14 +12,14 @@ Position::Position() {
     _row = (std::rand() % _max_row) + 1;
     _col = (std::rand() % _max_col) + 1;
 }
-Position::Position(const int& row, const int& col) {
+Position::Position(const int row, const int col) {
     if (!is_collision(row) || !is_collision(col)) {
         throw std::logic_error("Invalid input: incorrect position");
     }
     _row = row;
     _col = col;
 }
-Position::Position(const int& row, const char& col) {
+Position::Position(const int row, const char col) {
     if (!is_collision(row) || !is_collision(col)) {
         throw std::logic_error("Invalid input: incorrect position");
     }
