@@ -90,11 +90,16 @@ void Game_field::set(const Ship& ship) {
 	}
 }
 State Game_field::set(int raw, char col) {//1-10
-	if (raw<1 || raw>_row || col<'A' || col>('A' + _col - 1))
+	if ((raw<1 || raw>_row || (col<'A' || col>('A' + _col - 1))&&(col<'a'||col>('a'+_col-1))))
 		throw std::logic_error("Invalid input: incorrect move");
-	if (_field[raw - 1][col - 'A'] == '*') {
-		_field[raw-1][col-'A'] = 'X';
-		switch (check_destroy(raw - 1, col - 'A')) {
+	char tmp_col;
+	if (!isupper(col))
+		tmp_col = ('A' - 'a') + col;
+	else
+		tmp_col = col;
+	if (_field[raw - 1][tmp_col - 'A'] == '*') {
+		_field[raw-1][tmp_col -'A'] = 'X';
+		switch (check_destroy(raw - 1, tmp_col - 'A')) {
 		case 0:return Hit;
 		case 1:return BoatDestroyed;
 		case 2:return DestroyersDestroyed;
@@ -102,16 +107,20 @@ State Game_field::set(int raw, char col) {//1-10
 		case 4:return BattleshipDestroyed;
 		}
 	}
-	else return Missed;
+	else if (_field[raw - 1][tmp_col - 'A'] == ' ') {
+		_field[raw - 1][tmp_col - 'A'] = '.';
+		return Missed;
+	}else if(_field[raw - 1][tmp_col - 'A']=='.')
+		throw std::logic_error("Invalid input: incorrect move");
+	
 }
 std::string to_string(const Game_field& game_field, bool to_show_ships) {
 	std::string str;
 	str+= "  |";
 	for (int i = 0; i < game_field._col-1; i++) {
-		str += " ";
 		str+= ('A' + i);
+		str += " ";
 	}
-	str += " ";
 	str += ('A' + game_field._col - 1);
 	str += "|\n";
 	for (int i = 0; i < game_field._row; i++) {

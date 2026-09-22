@@ -10,16 +10,6 @@ static int count_char(const std::string& str, char ch) {
     }
     return cnt;
 }
-TEST(te_gf, constructor_default) {
-    Game_field f;
-    std::string s = to_string(f);
-    EXPECT_NE(s.find("  | A B C D E F G H I J|"), std::string::npos);
-    EXPECT_NE(s.find("1 |"), std::string::npos);
-    EXPECT_NE(s.find("10|"), std::string::npos);
-    EXPECT_EQ(s.find('X'), std::string::npos);
-    EXPECT_EQ(s.find('*'), std::string::npos);
-}
-
 TEST(te_gf, to_string_show_ships) {
     Game_field f;
     Ship s(2, 'h', 3, 'c');

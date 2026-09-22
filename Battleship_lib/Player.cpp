@@ -1,5 +1,5 @@
 #include "Player.h"
-const int Player::_max_ships_counts[4] = { 4, 3, 2, 1 };
+const int Player::_max_ships_counts[4] = { 1, 1, 0, 0 };
 Player::Player() {
     for (int i = 0; i < 4; i++) {
         _ships_counts[i] = 0;
