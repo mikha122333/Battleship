@@ -107,6 +107,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="test_Game_field.cpp" />
+    <ClCompile Include="test_Player.cpp" />
     <ClCompile Include="test_Position.cpp" />
     <ClCompile Include="test_Ship.cpp" />
   </ItemGroup>
