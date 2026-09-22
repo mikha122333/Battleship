@@ -1,38 +1,54 @@
 #include "pch.h"
 
 #include "Position.h"
-TEST(t_p_num,test_is_pos_corrrect) {
+TEST(te_po,constructor_1) {
 	Position p(2, 3);
-	EXPECT_TRUE(p.col(), 3);
 	EXPECT_TRUE(p.row(), 2);
+	EXPECT_TRUE(p.col(), 3);
 }
-TEST(t_p_num, test_is_pos_corrrect_without_data) {
-	Position p;
+TEST(te_po, constructor_1_exception) {
+	EXPECT_ANY_THROW(Position(11, 0));
+}
+TEST(te_po, constructor_2) {
+	Position p(2, 'A');
+	EXPECT_TRUE(p.row(), 2);
 	EXPECT_TRUE(p.col(), 1);
-	EXPECT_TRUE(p.row(), 1);
+	EXPECT_TRUE(p.char_col(), 'A');
 }
-TEST(t_p_num, error_if_higher_10) {
-	EXPECT_ANY_THROW(Position(1, 11));
+TEST(te_po, constructor_2_exception) {
+	EXPECT_ANY_THROW(Position(3, '/'));
 }
-TEST(t_p_str, test_is_pos_corrrect) {
-	Position p("(2 , 3)");
-	EXPECT_TRUE(p.col(), 3);
+TEST(te_po, constructor_copy) {
+	Position p2(2, 'A');
+	Position p(p2);
 	EXPECT_TRUE(p.row(), 2);
+	EXPECT_TRUE(p.col(), 1);
+	EXPECT_TRUE(p.char_col(), 'A');
 }
-TEST(t_p_str, error_if_higher_10) {
-	EXPECT_ANY_THROW(Position("(1 , 11)"));
-}
-TEST(t_p_num, error_if_lower_1) {
-	EXPECT_ANY_THROW(Position(1, 0));
-}
-TEST(t_p_num, is_setter_work) {
-	Position p;
-	p.col(5);
+TEST(te_op, setter_row) {
+	Position p(1,1);
 	p.row(3);
-	EXPECT_TRUE(p.col(), 5);
 	EXPECT_TRUE(p.row(), 3);
 }
-TEST(t_p_num, is_setter_can_do_error) {
-	Position p;
-	EXPECT_ANY_THROW(p.col(11));
+TEST(te_op, setter_row_error) {
+	Position p(1, 1);
+	EXPECT_ANY_THROW(p.row(55));
+}
+TEST(te_op, setter_col_num) {
+	Position p(1, 1);
+	p.col(3);
+	EXPECT_TRUE(p.col(), 3);
+}
+TEST(te_op, setter_col_char) {
+	Position p(1, 1);
+	p.col('b');
+	EXPECT_TRUE(p.char_col(), 'B');
+}
+TEST(te_op, setter_col_num_error) {
+	Position p(1, 1);
+	EXPECT_ANY_THROW( p.col(20));
+}
+TEST(te_op, setter_col_char_error) {
+	Position p(1, 1);
+	EXPECT_ANY_THROW(p.col('['));
 }
