@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game_field.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="Ship.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game_field.cpp" />
     <ClCompile Include="Position.cpp" />
     <ClCompile Include="Ship.cpp" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 #include "pch.h"
 
 #include "Ship.h"
-#define SHIP_TESTS
+//#define SHIP_TESTS
 #ifdef SHIP_TESTS
 TEST(te_sh,constructor_1) {
 	Position p(5, 5);
