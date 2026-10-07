@@ -1,13 +1,4 @@
 #include "Game.h"
-void Game::user_init(const std::string& user) {
-    _user.set_ship(user);
-}
-void Game::computer_init(const std::string& comp) {
-    _computer.set_ship(comp);
-}
-bool Game::is_end()noexcept {
-    return((_computer.check_lose()) || (_user.check_lose()));
-}
 void Game::show_game_window()noexcept {
     std::cout << "= COMPUTER GAME FIELD =\n\n";
     _user.show_field();
@@ -30,49 +21,45 @@ State Game::user_move(const std::string& input) {
     return res;
 }
 State Game::computer_move() {
-    bool f = 1;
+    bool continue_move = 1;
     State res;
-    for (int i = 0; i < 10 && f; i++) {
+    for (int i = 0; i < 10 && continue_move; i++) {
         try {
-            f = 0;
+            continue_move = 0;
             res = _user.set_action(1 + i, 'A' + i);
         }
         catch (std::logic_error) {
-            f = 1;
+            continue_move = 1;
         }
     }
-    if (f == 0)
+    if (continue_move == 0)
         return res;
-    for (int i = 0; i < 10 && f; i++) {
+    for (int i = 0; i < 10 && continue_move; i++) {
         try {
-            f = 0;
+            continue_move = 0;
             res = _user.set_action(1 + i, 'A' + 9 - i);
         }
         catch (std::logic_error) {
-            f = 1;
+            continue_move = 1;
         }
     }
-    if (f == 0)
+    if (continue_move == 0)
         return res;
-    for (int row = 0; row < 10 && f; row++) {
-        for (int col = 0; col < 10 && f; col++) {
+    for (int row = 0; row < 10 && continue_move; row++) {
+        for (int col = 0; col < 10 && continue_move; col++) {
             try {
-                f = 0;
+                continue_move = 0;
                 res = _user.set_action(row + 1, 'A' + col);
             }
             catch (std::logic_error) {
-                f = 1;
+                continue_move = 1;
             }
         }
     }
-    if (f == 0)
+    if (continue_move == 0)
         return res;
     else
         throw std::logic_error("Invalid input: incorrect move");
-}
-Game::Game() :_user(), _computer() {
-    //_user=Player();
-    //_computer=Player();
 }
 void Game::start() {
     std::string tmp;

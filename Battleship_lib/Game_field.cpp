@@ -62,7 +62,7 @@ int Game_field::check_destroy(int row, int col) {//0-9
 	}
 	return how_big_destroyed_ship;
 }
-Game_field::Game_field():_row(10),_col(10) {
+Game_field::Game_field() {
 	_field = new char* [_row];
 	for (int i = 0; i < _row; i++) {
 		_field[i] = new char[_col];
@@ -159,13 +159,15 @@ bool is_collision(const Game_field& game_field, const Ship& ship) {
 		plus_col = 1;
 	else
 		plus_row = 1;
+	if (!is_collision(ship.size(), ship.position(), ship.direction())) {
+		return false;
+	}
 	for (int i = 0; i < ship.size(); i++) {
 		for (int row = -1; row <= 1; row++) {
 			for (int col = -1; col <= 1; col++) {
-				if (ship.col() + col + plus_col * i -1>= 0 && ship.row() + row + plus_row * i-1 >= 0 && ship.col() + col + plus_col * i-1 < game_field._col && ship.row() + row + plus_row * i-1 < game_field._row) {
-					if (game_field._field[ship.row() + row + plus_row * i-1][ship.col() + col + plus_col * i-1] == '*')
+				if (game_field._field[ship.row() + row + plus_row * i-1][ship.col() + col + plus_col * i-1] == '*')
 						return false;
-				}
+				
 			}
 		}
 	}

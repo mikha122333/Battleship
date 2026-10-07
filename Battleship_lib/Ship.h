@@ -1,8 +1,6 @@
 #pragma once
-#include <string>
-#include <stdexcept>
-#include <sstream>
 #include "Position.h"
+bool is_collision(const int size, const Position& pos, const Direction dir)noexcept;
 enum Direction { Horizontal, Vertical };
 class Ship {
 private:
@@ -21,7 +19,11 @@ public:
     inline Position position() const noexcept { return _position; }
     inline Direction direction() const noexcept { return _direction; }
 
-    void size(const int size);
+    inline void size(const int size){
+        if (!is_collision(size, _position, _direction))
+            throw std::logic_error("Invalid input: incorrect ship");
+        _size = size;
+    }
     void row(const int row);
     void col(const int col);
     void col(const char col);

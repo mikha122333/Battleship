@@ -1,23 +1,17 @@
 #pragma once
 #include "Player.h"
-#include<sstream>
-#include <cstdlib>
-#include <ctime>
-#include<string>
-#include<stdexcept>
-#include<iostream>
 class Game {
 private:
     Player _user;
     Player _computer;
-    void user_init(const std::string& user);
-    void computer_init(const std::string& comp);
-    bool is_end()noexcept;
+    inline void user_init(const std::string& user) { _user.set_ship(user); }
+    inline void computer_init(const std::string& comp) { _computer.set_ship(comp); }
+    inline bool is_end()noexcept { return((_computer.check_lose()) || (_user.check_lose())); }
     void show_game_window()noexcept;
     State user_move(const std::string& input);
     State computer_move();
 public:
-    Game();
+    Game() :_user(), _computer() {}
     void start();
 };
 

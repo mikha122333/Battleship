@@ -1,10 +1,4 @@
 #pragma once
-#include <cstdlib>
-#include <ctime>
-#include<string>
-#include<stdexcept>
-#include<sstream>
-#include<iostream>
 #include "Game_field.h"
 class Player {
 private:

@@ -1,15 +1,12 @@
 #pragma once
-#include<iostream>
-#include<iomanip>
-#include<string>
 enum State { Missed, BoatDestroyed, DestroyersDestroyed, CruisersDestroyed, BattleshipDestroyed, Hit };
 #include "Ship.h"
 class Game_field {
 private:
 	char** _field;           
-	const int _row;            
-	const int _col; 
-	int check_destroy(int row, int col);
+	const int _row=10;            
+	const int _col=10; 
+	int check_destroy(int, int);
 public:
 	Game_field();
 	~Game_field();

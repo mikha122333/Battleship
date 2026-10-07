@@ -1,6 +1,6 @@
 #include "Ship.h"
 
-bool is_collision(const int size, const Position& pos, const Direction dir) noexcept {
+bool is_collision(const int size, const Position& pos, const Direction dir) noexcept {//can use try catch because dont generate errors by itself
     if (size < 1 || size > 4) return false;
     int col_plus = 0, row_plus = 0;
     if (dir == Horizontal)
@@ -47,13 +47,6 @@ Ship::Ship(const std::string& str) {
     parse(str, *this);
 }
 
-void Ship::size(const int size) {
-    if (size < 1 || size > 4)
-        throw std::logic_error("Invalid input: incorrect ship");
-    if (!is_collision(size, _position, _direction))
-        throw std::logic_error("Invalid input: incorrect ship");
-    _size = size;
-}
 
 void Ship::row(const int row) {
     try {
@@ -80,15 +73,7 @@ void Ship::col(const int col) {
 }
 
 void Ship::col(const char col) {
-    try {
-        Position tmp(_position);
-        tmp.col(col);
-        is_collision(_size, tmp, _direction);
-        _position.col(col);
-    }
-    catch (...) {
-        throw std::logic_error("Invalid input: incorrect ship");
-    }
+    this->col(static_cast<int>(toupper(col) - 'A'+1));
 }
 
 void Ship::direction(const Direction dir) {
@@ -113,7 +98,7 @@ void Ship::position(const Position& pos) {
     _position = pos;
 }
 
-void parse(const std::string& str, Ship& cool_ship) {
+void parse(const std::string& str, Ship& ship) {
     std::istringstream iss(str);
     int size;
     char dir_ch;
@@ -142,5 +127,5 @@ void parse(const std::string& str, Ship& cool_ship) {
     if (!is_collision(size, pos, dir))
         throw std::logic_error("Invalid input: incorrect ship");
 
-    cool_ship = Ship(size, pos, dir);
+    ship = Ship(size, pos, dir);
 }
