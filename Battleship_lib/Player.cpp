@@ -2,7 +2,7 @@
 #define MAX_SHIP_SIZE 4
 const int Player::_max_ships_counts[MAX_SHIP_SIZE] = { 1, 1, 0, 0 };
 Player::Player() {
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < MAX_SHIP_SIZE; i++) {
         _ships_counts[i] = 0;
     }
 }

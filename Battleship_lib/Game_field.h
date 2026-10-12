@@ -1,6 +1,6 @@
 #pragma once
-enum State { Missed, BoatDestroyed, DestroyersDestroyed, CruisersDestroyed, BattleshipDestroyed, Hit };
 #include "Ship.h"
+enum State { Missed, BoatDestroyed, DestroyersDestroyed, CruisersDestroyed, BattleshipDestroyed, Hit };
 class Game_field {
 private:
 	char** _field;           

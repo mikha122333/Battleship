@@ -24,11 +24,11 @@ public:
             throw std::logic_error("Invalid input: incorrect ship");
         _size = size;
     }
-    void row(const int row);
-    void col(const int col);
-    void col(const char col);
-    void direction(const Direction dir);
-    void direction(const char dir);
+    void row(int row);
+    void col(int col);
+    void col(char col);
+    void direction(Direction dir);
+    void direction(char dir);
     void position(const Position& pos);
 
     friend void parse(const std::string& str, Ship& ship);
